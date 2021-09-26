@@ -46,6 +46,8 @@ public class Game {
 
     // Methods
     public void iniciarJuego() {
+        getJugador().setPuntaje(0);
+        getRonda().setNumeroRonda(1);
         System.out.print("Nombre Jugador: " );
         jugador.setNombreJugador(scan.next());
         bandera = true;
