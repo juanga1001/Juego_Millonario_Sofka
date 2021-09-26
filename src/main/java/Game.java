@@ -7,7 +7,7 @@ public class Game {
     private Ronda ronda = new Ronda();;
     private Pregunta pregunta= new Pregunta();
     public static Scanner scan = new Scanner(System.in);
-    private static Integer opcion;
+    private static String opcion;
     private static DataBase dataBase = new DataBase();
     private static Boolean respuestaCorrecta;
     private static Boolean bandera = false;
@@ -48,6 +48,7 @@ public class Game {
     public void iniciarJuego() {
         getJugador().setPuntaje(0);
         getRonda().setNumeroRonda(1);
+        scan.useDelimiter("\n");
         System.out.print("Nombre Jugador: " );
         jugador.setNombreJugador(scan.next());
         bandera = true;
@@ -62,7 +63,7 @@ public class Game {
     public void mostrarMenu() {
         System.out.println("********************************");
         System.out.print("1. Nuevo juego\n" + "2. Mostrar puntajes\n" + "3. Salir\n" + "Elije una opción: ");
-        opcion = scan.nextInt(); // Read user input
+        opcion = scan.next(); // Read user input
     }
 
     public void infoRonda() {
@@ -73,8 +74,8 @@ public class Game {
     public boolean continuar() {
         System.out.println("********************************");
         System.out.println("ESTAS EN LA RONDA " + ronda.getNumeroRonda());
-        System.out.print("1. Jugar la siguiente ronda\n" + "2. Retirarme con " + jugador.getPuntaje() + " Puntos\n"
-                + "Elije una opción: ");
+        System.out.print("1. Jugar la siguiente ronda\n" + "2. Retirarme con " + ANSI_GREEN+jugador.getPuntaje() + " Puntos\n"
+                +ANSI_RESET+ "Elije una opción: ");
         int respuesta = scan.nextInt();
         if (respuesta == 1) {
             return true;
@@ -86,18 +87,18 @@ public class Game {
     public void desarrolloJuego(){
 
         switch (opcion) {
-            case 1: // START A NEW GAME
+            case "1": // START A NEW GAME
                 System.out.println("********************************");
                 iniciarJuego();
                 break;
-            case 2: // MOSTRAR PUNTAJES
+            case "2": // MOSTRAR PUNTAJES
                 System.out.println("********************************");
                 System.out.println("TODOS LOS PUNTAJES");
                 dataBase.showDB();
                 System.out.println("********************************");
                 opcion = null;
                 break;
-            case 3: // SALIR
+            case "3": // SALIR
                 System.out.println("*********** GOOD BYE *************");
                 System.exit(0);
         }
